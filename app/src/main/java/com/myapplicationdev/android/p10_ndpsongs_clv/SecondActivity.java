@@ -20,6 +20,7 @@ public class SecondActivity extends AppCompatActivity {
 	String moduleCode;
 	int requestCode = 9;
     Button btn5Stars;
+    CustomAdapter ca;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +31,15 @@ public class SecondActivity extends AppCompatActivity {
 
 		lv = (ListView) this.findViewById(R.id.lv);
         btn5Stars = (Button) this.findViewById(R.id.btnShow5Stars);
-
 		DBHelper dbh = new DBHelper(this);
         songList = dbh.getAllSongs();
         dbh.close();
 
-		adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, songList);
-		lv.setAdapter(adapter);
+//		adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, songList);
+//		lv.setAdapter(adapter);
+
+        ca = new CustomAdapter(this, R.layout.row, songList);
+        lv.setAdapter(ca);
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
